@@ -1,0 +1,23 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/color_dark">
+
+    <ImageView
+        android:id="@+id/toolbar_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:src="@drawable/edna_logo_new" />
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EDNA SALESPAD"
+        android:textAllCaps="true"
+        android:textColor="@color/black_semi_transparent"
+        android:textStyle="bold" />
+
+</android.support.v7.widget.Toolbar>

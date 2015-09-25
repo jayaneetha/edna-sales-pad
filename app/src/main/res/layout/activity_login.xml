@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <include
+        android:id="@+id/login_toolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/login_tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/error_red"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:clickable="true"
+        android:textAllCaps="true"
+        android:gravity="top|center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:textSize="30sp"
+        android:layout_above="@+id/login_et_username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:textStyle="bold"
+        android:id="@+id/textView" />
+
+    <EditText
+        android:id="@+id/login_et_username"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_et_username_hint"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/login_et_password"
+        android:inputType="textNoSuggestions"/>
+
+    <EditText
+        android:id="@+id/login_et_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_et_password_hint"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerInParent="true"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/login_btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_et_password"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selectable_button"
+        android:textSize="18sp"
+        android:text="@string/login_btn_sign_in_txt"
+        android:textColor="@android:color/white"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/server_list_spinner"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/login_et_password"
+        android:layout_toRightOf="@+id/login_et_password"
+        android:visibility="invisible"
+        android:layout_marginBottom="50dp"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/PIN"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/login_et_PIN_hint"
+        android:layout_marginBottom="50dp" />
+
+</RelativeLayout>
