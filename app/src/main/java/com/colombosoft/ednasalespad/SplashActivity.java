@@ -41,15 +41,17 @@ public class SplashActivity extends Activity {
                     if (pref.isDayStarted()) {
                         if (pref.getSelectedRoute() == null) {
                             Toast.makeText(SplashActivity.this, "Select Route", Toast.LENGTH_LONG).show();
-//                            Intent intent = new Intent(SplashActivity.this, ViewRoutesActivity.class);
-//                            intent.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
-//                            startActivity(intent);
-//                            finish();
+                            Intent intent = new Intent(SplashActivity.this, ViewRoutesActivity.class);
+                            intent.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
+                            startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(SplashActivity.this, "Dashboard", Toast.LENGTH_LONG).show();
-//                            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-//                            startActivity(intent);
-//                            finish();
+                            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                            startActivity(intent);
+                            finish();
+
+
                         }
 //                        startActivity(new Intent(SplashActivity.this, DashboardActivity.class));
 //                        finish();

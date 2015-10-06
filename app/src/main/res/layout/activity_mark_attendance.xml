@@ -11,26 +11,27 @@
 
     <TextView
         android:id="@+id/mark_attendance_tv_date"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mark_attendance_toolbar"
         android:layout_marginTop="20dp"
         android:text="10 February 2015"
         android:textSize="18sp"
         android:textColor="@android:color/black"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="16dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/mark_attendance_tv_clock"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mark_attendance_tv_date"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/black"
         android:text="12:35 PM"
         android:textSize="58sp"
-        android:textStyle="italic"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="16dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/mark_attendance_tv_address"

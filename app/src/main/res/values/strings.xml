@@ -8,12 +8,32 @@
     <string name="login_btn_sign_in_txt">SIGN IN</string>
     <string name="login_et_PIN_hint">Developer PIN</string>
 
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="date">Date</string>
+
+
+    <string name="drawer_open">open drawer</string>
+    <string name="drawer_close">close drawer</string>
+
+
+
+
     <string-array name="server_list">
         <item>Live</item>
         <item>Gateway</item>
         <item>Test</item>
+        <item>Test-IP</item>
     </string-array>
     
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_mark_attendance">MarkAttendanceActivity</string>
+    <string name="title_activity_view_routes">ViewRoutesActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_select_dealer">SelectDealerActivity</string>
 </resources>

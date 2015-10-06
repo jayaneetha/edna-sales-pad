@@ -1,6 +1,7 @@
 package com.colombosoft.ednasalespad;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
@@ -38,8 +39,6 @@ import at.markushi.ui.CircleButton;
 public class MarkAttendanceActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MarkAttendanceActivity.class.getSimpleName();
-//    private CircleButton btnAdd;
-//    private TextView tvFunction;
 
     private Location finalLocation;
     private LocationManager locationManager;
@@ -54,8 +53,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
     private boolean isDayStarted;
 
-//    private Geocoder geocoder;
-
     private TextView tvTime;
 
     private TextView tvLocationAddressBegin, tvLocationCoordinatesBegin, tvCapturedTimeBegin;
@@ -65,7 +62,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
     private TextView tvLocationAddressEnd, tvLocationCoordinatesEnd, tvCapturedTimeEnd;
     private CircleButton rndConfirmEnd;
 
-    //    private TextView tvAddress;
     private Runnable countRunnable;
     private SimpleDateFormat dateFormat;
     private String formattedDate;
@@ -212,13 +208,19 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 attendance.setLocalSession(sessionId);
                 dbHandler.storeAttendance(attendance);
 
+                try {
+                    networkFunctions.setAttendance(finalLocation, "begin");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 if(openSequence) {
                     Log.i(LOG_TAG,"View Routes");
 
-//                    Intent intent = new Intent(MarkAttendanceActivity.this, ViewRoutesActivity.class);
-//                    intent.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(MarkAttendanceActivity.this, ViewRoutesActivity.class);
+                    intent.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
+                    startActivity(intent);
+                    finish();
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -240,7 +242,11 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 attendance.setLongitude(finalLocation.getLongitude());
                 attendance.setLocalSession(sessionId);
                 dbHandler.storeAttendance(attendance);
-
+                try {
+                    networkFunctions.setAttendance(finalLocation , "end");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 sharedPref.endDay();
 
                 finish();
@@ -248,63 +254,8 @@ public class MarkAttendanceActivity extends ActionBarActivity {
             }
         });
 
-//        requestUpdates();
-
         locationHandler = new Handler();
-//        if(networkActive) {
-//            if(gpsActive){
-//                // Request timed location update using GPS
-//                requestGPSLocation();
-//
-//                if(switchRunnable == null) {
-//                    switchRunnable = new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            tvProgress.setText("Switching to Network Provider");
-//                            locationManager.removeUpdates(locationListener);
-//                            requestNetworkLocation();
-//                            locSwitch = true;
-//                        }
-//                    };
-//                }
-//
-//                locationHandler.postDelayed(switchRunnable, 15*1000);
-//            } else {
-//                // Request location update using network
-//                requestNetworkLocation();
-//            }
-//        } else {
-//            if(gpsActive){
-//                requestGPSLocation();
-//            } else {
-//                tvProgress.setVisibility(View.INVISIBLE);
-//                progressWheel.stopSpinning();
-//                Toast.makeText(MarkAttendanceActivity.this, "Please enable location service and try again", Toast.LENGTH_SHORT).show();
-//            }
-//        }
 
-        ////// requestUpdates();
-
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(finalLocation != null) {
-//
-//                    if(isDayStarted){
-//                        sharedPref.endDay();
-//                        Toast.makeText(MarkAttendanceActivity.this, "Day Ended", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        sessionId = sharedPref.startDay();
-//                        Toast.makeText(MarkAttendanceActivity.this, "Day Started", Toast.LENGTH_SHORT).show();
-//                    }
-//
-
-//
-
-//
-//                }
-//            }
-//        });
 
     }
 
@@ -353,21 +304,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
             networkActive = false;
         }
 
-//        if(gpsActive){
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//            tvProgress.setVisibility(View.VISIBLE);
-////            progressWheel.setVisibility(View.VISIBLE);
-//            progressWheel.spin();
-//        } else if (networkActive) {
-//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-//            tvProgress.setVisibility(View.VISIBLE);
-////            progressWheel.setVisibility(View.VISIBLE);
-//            progressWheel.spin();
-//        } else {
-////            showMessage("PLEASE ENABLE LOCATION SERVICE", RequestCodes.CODE_ERROR);
-//            tvProgress.setVisibility(View.INVISIBLE);
-//            progressWheel.stopSpinning();
-//        }
 
         if(networkActive) {
             if(gpsActive){
@@ -403,23 +339,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
         }
 
     }
-
-//    private Address getAddress(Location location) throws IOException {
-//
-//        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//        if(addresses != null && addresses.size() > 0) {
-//
-////            tvProgress.setVisibility(View.INVISIBLE);
-////            progressWheel.stopSpinning();z
-////
-////            showButton();
-//
-//            return addresses.get(0);
-//
-//        }
-//
-//        return null;
-//    }
 
     private class AttendanceLocationListener implements LocationListener {
 
@@ -524,20 +443,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                     }
                 }
 
-//                Address address = getAddress(finalLocation);
-//                if(address != null) {
-//
-//                    String street = address.getAddressLine(0);
-//                    String city = address.getAddressLine(1);
-//                    String country = address.getAddressLine(2);
-//
-//                    return street + ", " + city + "\n" + country;
-//
-//                } else {
-//                    Log.d(LOG_TAG, "Address is null");
-//                    return String.valueOf(finalLocation.getLatitude()) + ", " + String.valueOf(finalLocation.getLongitude());
-//                }
-
                 return null;
 
             } catch (IOException e) {
@@ -596,10 +501,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 }
             }
         }
-
-//        public void stopTimer() {
-//            Thread.currentThread().interrupt();
-//        }
 
     }
 

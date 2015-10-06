@@ -31,7 +31,22 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MarkAttendanceActivity"
-            android:label="@string/title_activity_mark_attendance" >
+            android:label="@string/title_activity_mark_attendance"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ViewRoutesActivity"
+            android:label="@string/title_activity_view_routes"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SelectDealerActivity"
+            android:label="@string/title_activity_select_dealer" >
         </activity>
     </application>
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/item_outlet_child_owner_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A. B. C. De Silva"
+        android:paddingLeft="10dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/primary_text_light"/>
+
+    <ImageView
+        android:id="@+id/item_outlet_child_land_imageview"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/land"
+        android:layout_below="@+id/item_outlet_child_owner_name"/>
+
+    <TextView
+        android:id="@+id/item_outlet_child_land_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/item_outlet_child_owner_name"
+        android:layout_toRightOf="@+id/item_outlet_child_land_imageview"
+        android:text="0312221212"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"/>
+
+    <ImageView
+        android:id="@+id/item_outlet_child_mobile_imageview"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/mobile"
+        android:layout_below="@+id/item_outlet_child_land_imageview"/>
+
+    <TextView
+        android:id="@+id/item_outlet_child_mobile_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/item_outlet_child_land_tv"
+        android:layout_toRightOf="@+id/item_outlet_child_mobile_imageview"
+        android:text="0771212121"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        />
+
+</RelativeLayout>

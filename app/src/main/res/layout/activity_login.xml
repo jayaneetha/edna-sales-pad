@@ -45,7 +45,8 @@
         android:layout_marginRight="20dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/login_et_password"
-        android:inputType="textNoSuggestions"/>
+        android:inputType="textNoSuggestions"
+        android:text="ed@prasanna.s" />
 
     <EditText
         android:id="@+id/login_et_password"
@@ -57,7 +58,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_centerInParent="true"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:text="123456" />
 
     <Button
         android:id="@+id/login_btn_sign_in"

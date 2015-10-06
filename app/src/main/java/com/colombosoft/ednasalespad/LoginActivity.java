@@ -1,8 +1,11 @@
 package com.colombosoft.ednasalespad;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -40,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +59,7 @@ public class LoginActivity extends ActionBarActivity {
     private final String SERVER_URL_LIVE = "http://edna.com/api";
     private final String SERVER_URL_GATEWAY = "http://gateway.edna.com/api";
     private final String SERVER_URL_TESTING = "http://gateway.ceylonlinux.com/edna_sfa2/android_service/";
-
-
+    private final String SERVER_URL_TESTING_IP = "http://124.43.26.21/edna_sfa2/android_service/";
 
 
     private Toolbar toolbar;
@@ -144,10 +148,13 @@ public class LoginActivity extends ActionBarActivity {
                         break;
                     case 2:
                         server_url = SERVER_URL_TESTING;
+                        break;
+                    case 3:
+                        server_url = SERVER_URL_TESTING_IP;
                 }
                 networkFunctions.baseURL = server_url;
                 pref.setServer(server_url);
-                Log.i(LOG_TAG,"Server URL Set to: " + server_url);
+                Log.i(LOG_TAG, "Server URL Set to: " + server_url);
             }
 
             @Override
@@ -257,6 +264,12 @@ public class LoginActivity extends ActionBarActivity {
                         }
                     });
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pDialog.setMessage("Authenticated\nDownloading Product Types...");
+                        }
+                    });
 
                     // Types
                     String types = networkFunctions.getProductTypes(user.getLocationId());
@@ -267,6 +280,12 @@ public class LoginActivity extends ActionBarActivity {
                     }
                     dbHandler.storeTypes(typesList);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pDialog.setMessage("Authenticated\nDownloading Flavours...");
+                        }
+                    });
                     // Flavours
                     String flavours = networkFunctions.getFlavours(user.getLocationId());
                     JSONArray flavoursJSONArray = new JSONArray(flavours);
@@ -276,6 +295,12 @@ public class LoginActivity extends ActionBarActivity {
                     }
                     dbHandler.storeFlavours(flavourList);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pDialog.setMessage("Authenticated\nDownloading Routes & Outlets...");
+                        }
+                    });
                     // Routes and outlets
                     String routes = networkFunctions.getRoutesAndOutlets(user.getLocationId(), user.getTerritoryId());
                     JSONArray routesJSONArray = new JSONArray(routes);
@@ -285,6 +310,12 @@ public class LoginActivity extends ActionBarActivity {
                     }
                     dbHandler.storeRouteList(routeList);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pDialog.setMessage("Authenticated\nDownloading Item Catagories...");
+                        }
+                    });
                     // Item categories
                     String categories = networkFunctions.getItemCategories(user.getLocationId());
                     JSONArray categoriesJSONArray = new JSONArray(categories);
@@ -294,7 +325,7 @@ public class LoginActivity extends ActionBarActivity {
                     }
 
                     String distStock = networkFunctions.getStockDetails(user.getLocationId(), 1);
-                    Log.wtf("DIST", distStock);
+                    Log.i("DIST", distStock);
                     JSONArray distStockJSONArray = new JSONArray(distStock);
                     List<Stock> distStocks = new ArrayList<Stock>();
                     for (int i = 0; i < distStockJSONArray.length(); i++) {
@@ -335,6 +366,12 @@ public class LoginActivity extends ActionBarActivity {
                         }
                     }
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pDialog.setMessage("Authenticated\nDownloading Banks...");
+                        }
+                    });
                     String bankResponse = networkFunctions.getBanks(user.getLocationId());
                     JSONArray bankResponseJSONArray = new JSONArray(bankResponse);
                     List<Bank> bankList = new ArrayList<Bank>();
@@ -349,7 +386,8 @@ public class LoginActivity extends ActionBarActivity {
                             pDialog.setMessage("Authenticated\nDownloading Images...");
                         }
                     });
-                    //downloadImages();
+
+                    downloadImages();
 
                     dbHandler.storeUser(user);
                     pref.storeLoginUser(user);
@@ -365,7 +403,7 @@ public class LoginActivity extends ActionBarActivity {
                 return false;
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.wtf("ERRORRRR", e.getMessage());
+                Log.i("ERRORRRR", e.getMessage());
                 errors.add("Received an invalid response from the server.");
                 return false;
             } catch (NumberFormatException e) {
@@ -407,6 +445,58 @@ public class LoginActivity extends ActionBarActivity {
                 showErrorText(sb.toString());
             }
         }
+
+        public void downloadImages() {
+
+            final String PRODUCT_DIR = new StringBuilder().append(Environment.getExternalStorageDirectory()).append("/EDNA/Products/").toString();
+            boolean flag3;
+            if (uris == null) {
+                return;
+            }
+            File file = new File((new StringBuilder()).append(Environment.getExternalStorageDirectory()).append("/EDNA/Products/").toString());
+            flag3 = true;
+            if (!file.exists()) {
+                flag3 = file.mkdirs();
+            }
+
+            if (!flag3) {
+                Log.d(LOG_TAG, "Cannot create directory");
+            } else {
+                int i = 0;
+                String fileName;
+
+                for (i = 0; i < uris.size(); i++) {
+                    fileName = uris.get(i);
+
+                    if ((new File(PRODUCT_DIR, fileName)).exists()) {
+                        Log.i(LOG_TAG, new StringBuilder().append(PRODUCT_DIR).append(fileName).append(" already exists. Skipping Download").toString());
+                    } else {
+                        Bitmap bitmap = null;
+                        bitmap = networkFunctions.downloadImage(fileName);
+
+                        if (bitmap == null) {
+                            //If unable to fetch the image, assign a default image
+                            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_product);
+                        }
+
+                        //Saving the image
+                        File image_file = new File(PRODUCT_DIR, fileName);
+                        FileOutputStream fileOutputStream = null;
+                        try {
+                            fileOutputStream = new FileOutputStream(image_file);
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Log.i(LOG_TAG, "Loaded: " + fileName);
+                    }
+                }
+
+            }
+        }
+
     }
 
 }

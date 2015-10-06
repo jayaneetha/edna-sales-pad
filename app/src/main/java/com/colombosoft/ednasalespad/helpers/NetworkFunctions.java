@@ -1,5 +1,7 @@
 package com.colombosoft.ednasalespad.helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.util.Log;
 
@@ -13,9 +15,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -46,9 +50,10 @@ public class NetworkFunctions {
 //    private final String baseURL = "http://192.168.1.200/edna_sfa2/";
 
 
-    public String getBaseURL(){
+    public String getBaseURL() {
         return this.baseURL;
     }
+
     /**
      * This function will POST username and password and will return a the response JSON
      * from the server.
@@ -65,7 +70,7 @@ public class NetworkFunctions {
         params.add(new BasicNameValuePair("password", password));
 
 //        return postToServer(baseURL + "login", params); // Test Server
-        Log.i(LOG_TAG,baseURL);
+        Log.i(LOG_TAG, baseURL);
         return postToServer(baseURL + "user_login", params);
 
     }
@@ -76,7 +81,7 @@ public class NetworkFunctions {
         params.add(new BasicNameValuePair("position_id", String.valueOf(locationId)));
         params.add(new BasicNameValuePair("Id_territory", String.valueOf(territoryId)));
 
-        Log.wtf("TERRITORY", String.valueOf(territoryId));
+        Log.i("TERRITORY", String.valueOf(territoryId));
 
         return postToServer(baseURL + "getOutlet", params);
     }
@@ -149,6 +154,20 @@ public class NetworkFunctions {
     }
 
     /**
+     * @param location
+     * @param task     either start attendance or end attendance "begin" or "end"
+     * @return
+     */
+    public String setAttendance(Location location, String task) throws IOException{
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("latitude", String.valueOf(location.getLatitude())));
+        params.add(new BasicNameValuePair("longitude", String.valueOf(location.getLongitude())));
+        params.add(new BasicNameValuePair("task", task));
+
+        return postToServer(baseURL + "attendance", params);
+    }
+
+    /**
      * This function POSTs params to server and gets the response.
      *
      * @param url    The URL to POST to
@@ -190,7 +209,7 @@ public class NetworkFunctions {
                 br.close();
 
                 response = sb.toString();
-                Log.wtf(LOG_TAG, "Server Response : \n" + response);
+                Log.i(LOG_TAG, "Server Response : \n" + response);
         }
 
         return response;
@@ -268,7 +287,7 @@ public class NetworkFunctions {
                 result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
             }
         }
-        Log.wtf("SERVER REQUEST", result.toString());
+        Log.i("SERVER REQUEST", result.toString());
         return result.toString();
     }
 
@@ -332,11 +351,30 @@ public class NetworkFunctions {
         params.add(new BasicNameValuePair("cash_check_payment", cashCheckPaymentJasonArray.toString()));
 
         String jsonSring = cashCheckPaymentJasonArray.toString();
-        Log.wtf("PAYMENT SYNC", jsonSring);
+        Log.i("PAYMENT SYNC", jsonSring);
 
         return postToServer(baseURL + "save_payments", params);
     }
 
-    //public String get
+    public Bitmap downloadImage(String fileName){
+        String image_url = (new StringBuilder()).append("http://124.43.26.21/edna_sfa2/uploads/product_images/").append(fileName).toString();
+        Bitmap bitmap = null;
+        Log.i(LOG_TAG, "Fetching: " + image_url);
+        try {
+            HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(image_url).openConnection();
+            httpURLConnection.setConnectTimeout(10000);
+            httpURLConnection.setReadTimeout(10000);
+
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(httpURLConnection.getInputStream());
+
+            bitmap = BitmapFactory.decodeStream((InputStream) bufferedInputStream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return bitmap;
+        }
+    }
 
 }

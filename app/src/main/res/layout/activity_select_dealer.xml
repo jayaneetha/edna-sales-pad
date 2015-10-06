@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:background="@color/bg_color">
+
+    <include android:id="@+id/view_outlets_toolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_toolbar"
+        android:layout_marginTop="30dp"
+        android:text="@string/date"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_toolbar"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_toRightOf="@id/view_outlets_tv_date"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_route"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_date"
+        android:layout_marginTop="10dp"
+        android:text="Default Route"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_route_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_date"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/view_outlets_tv_route"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_fixed_target"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_route"
+        android:layout_marginTop="10dp"
+        android:text="Fixed Target"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_fixed_target_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_route"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/view_outlets_tv_fixed_target"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_selected_target"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_fixed_target"
+        android:layout_marginTop="10dp"
+        android:text="Selected Target"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_selected_target_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_outlets_tv_fixed_target"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/view_outlets_tv_selected_target"/>
+
+    <com.colombosoft.ednasalespad.libs.widget.AnimatedExpandableListView
+        android:id="@+id/view_outlets_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view_outlets_tv_selected_target"
+        android:layout_marginTop="20dp"
+        android:groupIndicator="@null"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"></com.colombosoft.ednasalespad.libs.widget.AnimatedExpandableListView>
+
+    <TextView
+        android:id="@+id/view_outlets_tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:textAllCaps="true"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/view_outlets_fab_add_dealer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        fab:fab_colorNormal="@color/accent"
+        fab:fab_colorPressed="@color/accent_pressed"
+        fab:fab_colorRipple="@color/ripple"
+        android:src="@drawable/add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"/>
+</RelativeLayout>
