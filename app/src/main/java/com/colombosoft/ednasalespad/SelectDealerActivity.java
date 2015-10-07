@@ -188,12 +188,13 @@ public class SelectDealerActivity extends ActionBarActivity {
                         selectedTarget = value;
                         tvSelectedTarget.setText(numberFormat.format(selectedTarget));
                         route.setSelectedTarget(selectedTarget);
+                        dbHandler.updateRoute(route);
                     }
                 });
 
+                keypad.show();
                 keypad.setHeader("Select New Target");
                 keypad.loadValue(selectedTarget);
-                keypad.show();
                 return true;
             }
         });

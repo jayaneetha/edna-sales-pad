@@ -1,4 +1,3 @@
-
 package com.colombosoft.ednasalespad.helpers;
 
 import android.content.ContentValues;
@@ -1087,8 +1086,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues cashValues = new ContentValues();
         ContentValues chequeValues = new ContentValues();
 
-        for(PaymentAllocator allocation : allocations) {
-            if(allocation.getCashPayment() != null) {
+        for (PaymentAllocator allocation : allocations) {
+            if (allocation.getCashPayment() != null) {
                 cashValues.put(keyInvoiceNo, allocation.getInvoiceId());
                 cashValues.put(keyCashDate, allocation.getCashPayment().getPaymentTime());
                 cashValues.put(keyCashAmount, allocation.getCashPayment().getPaymentAmount());
@@ -1096,7 +1095,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 db.insert(tableCashPayment, null, cashValues);
             }
 
-            if(allocation.getCheque() != null) {
+            if (allocation.getCheque() != null) {
                 chequeValues.put(keyInvoiceNo, allocation.getInvoiceId());
                 chequeValues.put(keyChequeNo, allocation.getCheque().getChequeNo());
                 chequeValues.put(keyChequeDate, allocation.getCheque().getChequeDate());
@@ -1124,14 +1123,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(invoiceId)});
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<CashPayment> cashPayments = new ArrayList<>();
 
-            do{
+            do {
                 CashPayment cashPayment = new CashPayment(cursor.getLong(0), cursor.getDouble(1));
                 cashPayment.setSynced(cursor.getInt(2) == 1);
                 cashPayments.add(cashPayment);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cashPayments;
 
@@ -1153,14 +1152,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(invoiceId)});
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<CashPayment> cashPayments = new ArrayList<>();
 
-            do{
+            do {
                 CashPayment cashPayment = new CashPayment(cursor.getLong(0), cursor.getDouble(1));
                 cashPayment.setSynced(cursor.getInt(2) == 1);
                 cashPayments.add(cashPayment);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cashPayments;
 
@@ -1183,15 +1182,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<CashPayment> cashPayments = new ArrayList<>();
 
-            do{
+            do {
                 CashPayment cashPayment = new CashPayment(cursor.getLong(0), cursor.getDouble(1));
                 cashPayment.setSynced(cursor.getInt(2) == 1);
                 cashPayment.setInvoiceId(cursor.getLong(3));
                 cashPayments.add(cashPayment);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cashPayments;
 
@@ -1217,14 +1216,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(invoiceId)});
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<Cheque> cheques = new ArrayList<>();
             do {
                 Cheque cheque = new Cheque(cursor.getString(0), cursor.getLong(1), cursor.getDouble(2), cursor.getInt(3), cursor.getInt(4));
                 cheque.setSynced(cursor.getInt(5) == 1);
                 cheque.setInvoiceId(cursor.getLong(6));
                 cheques.add(cheque);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cheques;
         }
@@ -1248,13 +1247,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(invoiceId)});
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<Cheque> cheques = new ArrayList<>();
             do {
                 Cheque cheque = new Cheque(cursor.getString(0), cursor.getLong(1), cursor.getDouble(2), cursor.getInt(3), cursor.getInt(4));
                 cheque.setSynced(cursor.getInt(5) == 1);
                 cheques.add(cheque);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cheques;
         }
@@ -1279,20 +1278,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<Cheque> cheques = new ArrayList<>();
             do {
                 Cheque cheque = new Cheque(cursor.getString(0), cursor.getLong(1), cursor.getDouble(2), cursor.getInt(3), cursor.getInt(4));
                 cheque.setSynced(cursor.getInt(5) == 1);
                 cheque.setInvoiceId(cursor.getLong(6));
                 cheques.add(cheque);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return cheques;
         }
 
         return null;
-    };
+    }
+
+    ;
 
     public void setCashPaymentAsSynced(List<CashPayment> cashPayments) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1437,7 +1438,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        for(OutletType outletType : outletTypes) {
+        for (OutletType outletType : outletTypes) {
             values.put(keyOutletTypeId, outletType.getTypeId());
             values.put(keyOutletTypeName, outletType.getTypeName());
             db.insert(tableOutletType, null, values);
@@ -1457,12 +1458,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<OutletType> outletTypes = new ArrayList<>();
-            do{
+            do {
                 OutletType outletType = new OutletType(cursor.getInt(0), cursor.getString(1));
                 outletTypes.add(outletType);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
             return outletTypes;
         }
 
@@ -1473,7 +1474,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        for(OutletClass outletClass : outletClasses) {
+        for (OutletClass outletClass : outletClasses) {
             values.put(keyOutletTypeId, outletClass.getClassId());
             values.put(keyOutletTypeName, outletClass.getClassName());
             db.insert(tableOutletClass, null, values);
@@ -1493,12 +1494,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             List<OutletClass> outletClasses = new ArrayList<>();
-            do{
+            do {
                 OutletClass outletClass = new OutletClass(cursor.getInt(0), cursor.getString(1));
                 outletClasses.add(outletClass);
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
             return outletClasses;
         }
 
@@ -1599,6 +1600,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.insert(tableRoute, null, routeInsert);
         }
     }
+
+    public void updateRoute(Route route) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(keyRouteName, route.getRouteName());
+        contentValues.put(keyRouteFixedTarget, route.getFixedTarget());
+        contentValues.put(keyRouteSelectedTarget, route.getSelectedTarget());
+        db.update(tableRoute,contentValues, keyRouteId + "=?",new String[]{String.valueOf(route.getRouteId())});
+    }
+
 
     public void storeOutlets(List<Outlet> outletList) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1701,7 +1712,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /**
      * Returns a list of outstanding details of the outlet.
-     *
      *
      * @param outletId
      * @return
@@ -2089,7 +2099,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor routeCursor = db.rawQuery(selectRoute, new String[]{String.valueOf(routeId)});
 
-        if(routeCursor.moveToFirst()) {
+        if (routeCursor.moveToFirst()) {
             Route route = new Route();
             route.setRouteId(routeCursor.getInt(0));
             route.setRouteName(routeCursor.getString(1));
@@ -2239,7 +2249,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + tableOutletHistory + "." + keyOutletId + ", "
                 + tableCashPayment + "." + flagIsSynced
                 + " from " + tableCashPayment + " left join " + tableOutletHistory
-                + " on "  + tableCashPayment + "." + keyInvoiceNo + " = " + tableOutletHistory + "." + keyInvoiceNo
+                + " on " + tableCashPayment + "." + keyInvoiceNo + " = " + tableOutletHistory + "." + keyInvoiceNo
                 + " where " + keyCashDate + "> ? and " + keyCashDate + " < ?"
                 + " order by " + tableCashPayment + "." + keyCashDate + " desc";
 
@@ -2253,7 +2263,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + tableOutletHistory + "." + keyOutletId + ", "
                 + tableChequePayment + "." + flagIsSynced
                 + " from " + tableChequePayment + " left join " + tableOutletHistory
-                + " on "  + tableChequePayment + "." + keyInvoiceNo + " = " + tableOutletHistory + "." + keyInvoiceNo
+                + " on " + tableChequePayment + "." + keyInvoiceNo + " = " + tableOutletHistory + "." + keyInvoiceNo
                 + " where " + keyChequeDate + "> ? and " + keyChequeDate + " < ?"
                 + " order by " + tableChequePayment + "." + keyChequeDate + " desc";
 
@@ -2263,7 +2273,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cashCursor = db.rawQuery(cashQuery, new String[]{String.valueOf(timeBegin), String.valueOf(timeEnd)});
         Cursor chequeCursor = db.rawQuery(chequeQuery, new String[]{String.valueOf(timeBegin), String.valueOf(timeEnd)});
 
-        if(cashCursor.moveToFirst()) {
+        if (cashCursor.moveToFirst()) {
             do {
                 CashPayment cashPayment = new CashPayment(cashCursor.getLong(0), cashCursor.getDouble(1));
                 cashPayment.setInvoiceId(cashCursor.getLong(2));
@@ -2273,26 +2283,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cashCursor.moveToNext());
         }
 
-        if(chequeCursor.moveToFirst()) {
+        if (chequeCursor.moveToFirst()) {
             do {
                 Cheque cheque = new Cheque(chequeCursor.getString(0), chequeCursor.getLong(1), chequeCursor.getDouble(2), chequeCursor.getInt(3), chequeCursor.getInt(4));
                 cheque.setInvoiceId(chequeCursor.getLong(5));
                 cheque.setOutletId(chequeCursor.getInt(6));
                 cheque.setSynced(chequeCursor.getInt(7) == 1);
                 cheques.add(cheque);
-            } while(chequeCursor.moveToNext());
+            } while (chequeCursor.moveToNext());
         }
 
         int cashIndex = 0;
         int cheqIndex = 0;
         List<Object> finalList = new ArrayList<>();
 
-        while(cashIndex < cashPayments.size() && cheqIndex < cheques.size()) {
+        while (cashIndex < cashPayments.size() && cheqIndex < cheques.size()) {
 
             CashPayment cashPayment = cashPayments.get(cashIndex);
             Cheque cheque = cheques.get(cheqIndex);
 
-            if(cashPayment.getPaymentAmount() < cheque.getChequeDate()) {
+            if (cashPayment.getPaymentAmount() < cheque.getChequeDate()) {
                 finalList.add(cashPayment);
                 cashIndex++;
             } else {
@@ -2301,7 +2311,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
 
         }
-
 
 
 //        String chequeQuery = "select "
@@ -2421,17 +2430,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor historyCursor = db.rawQuery(historyQuery, new String[]{String.valueOf(HistoryDetail.TYPE_INVOICE)});
 
-        if(historyCursor.moveToFirst()) {
+        if (historyCursor.moveToFirst()) {
             do {
                 Invoice invoice = new Invoice(historyCursor.getLong(0), historyCursor.getLong(1), historyCursor.getDouble(2), historyCursor.getDouble(5), historyCursor.getDouble(6));
                 allHistoryDetails.add(new HistoryDetail(historyCursor.getInt(7), invoice, historyCursor.getString(3), historyCursor.getLong(1)));
-            } while(historyCursor.moveToNext());
+            } while (historyCursor.moveToNext());
         }
 
         Cursor cashCursor = db.rawQuery(cashQuery, new String[]{String.valueOf(timeBegin), String.valueOf(timeEnd)});
         List<CashPayment> cashPayments = new ArrayList<>();
 
-        if(cashCursor.moveToFirst()) {
+        if (cashCursor.moveToFirst()) {
             do {
                 CashPayment cashPayment = new CashPayment(cashCursor.getLong(0), cashCursor.getDouble(1));
                 cashPayment.setInvoiceId(cashCursor.getLong(2));
@@ -2447,7 +2456,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d(LOG_TAG, "All Cheque dates dump\n" + DatabaseUtils.dumpCursorToString(db.rawQuery("select " + keyChequeDate + " from " + tableChequePayment, null)));
         Log.d(LOG_TAG, "Cheque between time dump\n" + DatabaseUtils.dumpCursorToString(chequeCursor));
 
-        if(chequeCursor.moveToFirst()) {
+        if (chequeCursor.moveToFirst()) {
             do {
                 Cheque cheque = new Cheque(chequeCursor.getString(0), chequeCursor.getLong(1), chequeCursor.getDouble(2), chequeCursor.getInt(3), chequeCursor.getInt(4));
                 cheque.setInvoiceId(chequeCursor.getLong(5));
@@ -2456,18 +2465,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (chequeCursor.moveToNext());
         }
 
-        for(CashPayment cashPayment : cashPayments) {
-            for(HistoryDetail historyDetail : allHistoryDetails) {
-                if(historyDetail.getInvoice().getInvoiceId() == cashPayment.getInvoiceId()) {
+        for (CashPayment cashPayment : cashPayments) {
+            for (HistoryDetail historyDetail : allHistoryDetails) {
+                if (historyDetail.getInvoice().getInvoiceId() == cashPayment.getInvoiceId()) {
                     historyDetail.getInvoice().addCashPayment(cashPayment);
                     break;
                 }
             }
         }
 
-        for(Cheque cheque : cheques) {
-            for(HistoryDetail historyDetail : allHistoryDetails) {
-                if(historyDetail.getInvoice().getInvoiceId() == cheque.getInvoiceId()) {
+        for (Cheque cheque : cheques) {
+            for (HistoryDetail historyDetail : allHistoryDetails) {
+                if (historyDetail.getInvoice().getInvoiceId() == cheque.getInvoiceId()) {
                     historyDetail.getInvoice().addChequePayment(cheque);
                     break;
                 }
@@ -2476,32 +2485,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         List<HistoryDetail> filteredHistoryDetails = new ArrayList<>();
 
-        for(HistoryDetail historyDetail : allHistoryDetails) {
+        for (HistoryDetail historyDetail : allHistoryDetails) {
             boolean todayInvoice = historyDetail.getInvoice().getInvoiceTime() > timeBegin && historyDetail.getInvoice().getInvoiceTime() < timeEnd;
             boolean invoiceWithPayment = historyDetail.getInvoice().getCashPayments() != null || historyDetail.getInvoice().getChequePayments() != null;
 
             // Add the history detail tp the filtered list if it's either an invoice from today or has a payment made today
-            if(todayInvoice || invoiceWithPayment) filteredHistoryDetails.add(historyDetail);
+            if (todayInvoice || invoiceWithPayment) filteredHistoryDetails.add(historyDetail);
         }
 
         List<PaymentPinHolder> pinHolders = new ArrayList<>();
 
 //        pinHolders.add(new PaymentPinHolder("Collections of the date " + new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(timeBegin))));
 
-        for(HistoryDetail historyDetail : filteredHistoryDetails) {
+        for (HistoryDetail historyDetail : filteredHistoryDetails) {
             boolean todayInvoice = historyDetail.getInvoice().getInvoiceTime() > timeBegin && historyDetail.getInvoice().getInvoiceTime() < timeEnd;
-            if(todayInvoice) {
+            if (todayInvoice) {
                 pinHolders.add(new PaymentPinHolder(PaymentPinHolder.TYPE_DAY, historyDetail));
             }
         }
 
 //        pinHolders.add(new PaymentPinHolder("Collections of other invoices"));
 
-        for(HistoryDetail historyDetail : filteredHistoryDetails) {
+        for (HistoryDetail historyDetail : filteredHistoryDetails) {
             boolean todayInvoice = historyDetail.getInvoice().getInvoiceTime() > timeBegin && historyDetail.getInvoice().getInvoiceTime() < timeEnd;
 //            boolean invoiceWithPayment = historyDetail.getHistoryDetail().getCashPayments() != null || historyDetail.getHistoryDetail().getChequePayments() != null;
 
-            if(!todayInvoice) {
+            if (!todayInvoice) {
                 pinHolders.add(new PaymentPinHolder(PaymentPinHolder.TYPE_OTHER, historyDetail));
             }
         }
@@ -3341,9 +3350,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + " from " + tableAttendance;
         Cursor cursor = db.rawQuery(query, null);
         List<Attendance> attendances = new ArrayList<Attendance>();
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
-                Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4)==1, cursor.getInt(5), cursor.getString(6));
+                Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4) == 1, cursor.getInt(5), cursor.getString(6));
                 attendance.setLatitude(cursor.getDouble(2));
                 attendance.setLongitude(cursor.getDouble(3));
                 attendances.add(attendance);
@@ -3367,9 +3376,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + " from " + tableAttendance + " where not " + flagIsSynced;
         Cursor cursor = db.rawQuery(query, null);
         List<Attendance> attendances = new ArrayList<Attendance>();
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
-                Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4)==1, cursor.getInt(5),cursor.getString(6));
+                Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4) == 1, cursor.getInt(5), cursor.getString(6));
                 attendance.setLatitude(cursor.getDouble(2));
                 attendance.setLongitude(cursor.getDouble(3));
                 attendances.add(attendance);
@@ -3403,8 +3412,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //                attendances.add(attendance);
 //            } while (cursor.moveToNext());
 //        }
-        if(cursor.moveToFirst()) {
-            Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4)==1, cursor.getInt(5),cursor.getString(6));
+        if (cursor.moveToFirst()) {
+            Attendance attendance = new Attendance(cursor.getLong(0), cursor.getInt(1), cursor.getInt(4) == 1, cursor.getInt(5), cursor.getString(6));
             attendance.setLatitude(cursor.getDouble(2));
             attendance.setLongitude(cursor.getDouble(3));
 
