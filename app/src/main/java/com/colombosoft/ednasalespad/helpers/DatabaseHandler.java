@@ -1669,9 +1669,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(keyOutletPromotion2ImageUri, outlet.getPromotion2ImageUri());
 
         db.update(tableOutlet, contentValues, keyOutletId + "=?", new String[]{String.valueOf(outlet.getOutletId())});
-
-        Log.i(LOG_TAG,outlet.getFrontImageURI());
-
     }
 
 
