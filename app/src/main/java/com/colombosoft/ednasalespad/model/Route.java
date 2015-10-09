@@ -91,7 +91,7 @@ public class Route implements Serializable {
 
         JSONArray outletsArray = instance.getJSONArray("outlets");
         for (int i = 0; i < outletsArray.length(); i++) {
-            Outlet outlet = Outlet.parseOutlet(outletsArray.getJSONObject(i));
+            Outlet outlet = Outlet.parseOutlet(outletsArray.getJSONObject(i),route.getRouteId());
             if (outlet != null) {
                 outlets.add(outlet);
             }

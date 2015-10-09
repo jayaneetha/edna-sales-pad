@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.colombosoft.ednasalespad.helpers.DatabaseHandler;
 import com.colombosoft.ednasalespad.helpers.SharedPref;
 import com.colombosoft.ednasalespad.model.User;
 import com.colombosoft.ednasalespad.utils.RequestCodes;
@@ -26,16 +27,26 @@ public class SplashActivity extends Activity {
         //instantiate SharePref Object
         pref = SharedPref.getInstance(SplashActivity.this);
 
+        DatabaseHandler databaseHandler = DatabaseHandler.getDbHandler(SplashActivity.this);
+        User user = pref.getLoginUser();
+        if (user != null) {
+            int userId = user.getId();
+            long lastLoggedInTime = databaseHandler.getLoggedInTime(userId);
+            long now = System.currentTimeMillis() / 1000L;
+            if ((now - lastLoggedInTime) > 86400) {
+                pref.setLoginStatus(false);
+            }
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (pref.isLoggedIn()) {
 
-                    Intent intent2 = new Intent(SplashActivity.this, MarkAttendanceActivity.class);
-                    intent2.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
-                    startActivity(intent2);
-                    finish();
-
+//                    Intent intent2 = new Intent(SplashActivity.this, MarkAttendanceActivity.class);
+//                    intent2.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
+//                    startActivity(intent2);
+//                    finish();
 
 
                     if (pref.isDayStarted()) {
@@ -66,10 +77,10 @@ public class SplashActivity extends Activity {
                     User user = pref.getLoginUser();
                     if (user != null) {
                         Toast.makeText(SplashActivity.this, "Unlock", Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(SplashActivity.this, UnlockActivity.class);
-//                        intent.putExtra("user", user);
-//                        startActivity(intent);
-//                        finish();
+                        Intent intent = new Intent(SplashActivity.this, UnlockActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                        finish();
                     } else {
                         Log.i(LOG_TAG, "Login");
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));

@@ -49,6 +49,7 @@ public class SelectDealerActivity extends ActionBarActivity {
     private boolean startingSequence;
 
     private double selectedTarget = 0;
+    private long backPressedTime;
 
 
     @Override
@@ -139,12 +140,12 @@ public class SelectDealerActivity extends ActionBarActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
                 Outlet selectedOutlet = outletList.get(groupPosition);
-//                Intent intent = new Intent(SelectDealerActivity.this, DealerDetailsActivity.class);
-//                intent.putExtra("outlet", selectedOutlet);
-//                pref.setSelectedOutletId(selectedOutlet.getOutletId());
-//                startActivity(intent);
-//                finish();
-                Toast.makeText(SelectDealerActivity.this, selectedOutlet.toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SelectDealerActivity.this, DealerDetailsActivity.class);
+                intent.putExtra("outlet", selectedOutlet);
+                pref.setSelectedOutletId(selectedOutlet.getOutletId());
+                startActivity(intent);
+                finish();
+//                Toast.makeText(SelectDealerActivity.this, selectedOutlet.toString(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -208,6 +209,22 @@ public class SelectDealerActivity extends ActionBarActivity {
                 Toast.makeText(SelectDealerActivity.this, "Add New Dealer", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - backPressedTime > 2000) {
+            // More than 2 seconds since last back press. So user must press back again to exit
+            Toast.makeText(SelectDealerActivity.this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+            backPressedTime = currentTime;
+        } else {
+            // Less than 2 seconds since last back press meaning a double back press.
+            // In which case app should close.
+            finish();
+        }
 
     }
 

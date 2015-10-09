@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/mark_attendance_toolbar"
+        layout="@layout/toolbar" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Update Profile"
+        android:id="@+id/tv_update_profile"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="3">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Name: " />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="20dp"
+                android:width="300dp"
+                android:inputType="text" />
+
+            <TextView android:layout_column="3" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Current Password: " />
+
+            <EditText
+                android:id="@+id/et_current_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="20dp"
+                android:width="300dp"
+                android:inputType="textPassword" />
+
+            <TextView android:layout_column="3" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_new_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="New Password: " />
+
+            <EditText
+                android:id="@+id/et_new_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="20dp"
+                android:width="300dp"
+                android:inputType="textPassword" />
+
+            <TextView android:layout_column="3" />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_new_password_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Confirm New Password: " />
+
+            <EditText
+                android:id="@+id/et_new_password_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="20dp"
+                android:width="300dp"
+                android:inputType="textPassword" />
+
+            <TextView android:layout_column="3" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:width="100dp"
+        android:background="@drawable/selectable_button"
+        android:text="Update"
+        android:textColor="@color/white" />
+
+</LinearLayout>

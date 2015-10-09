@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.util.Log;
 
+import com.colombosoft.ednasalespad.MyApplication;
 import com.colombosoft.ednasalespad.model.CashPayment;
 import com.colombosoft.ednasalespad.model.Cheque;
 import com.colombosoft.ednasalespad.model.Order;
@@ -36,19 +37,24 @@ import java.util.List;
 public class NetworkFunctions {
 
     private final String LOG_TAG = NetworkFunctions.class.getSimpleName();
+    public String baseURL; //= "http://gateway.ceylonlinux.com/edna_sfa2/android_service/"; // Live server
 
     /**
      * The base URL to POST the parameters to. The function names will be appended to this
      */
 //    private final String baseURL = "http://gateway.ceylonlinux.com/edna_sfa/android_service/"; // Test server
-    public String baseURL; //= "http://gateway.ceylonlinux.com/edna_sfa2/android_service/"; // Live server
+
+    public NetworkFunctions() {
+        SharedPref pref = SharedPref.getInstance(MyApplication.getContext());
+        baseURL = pref.getServer();
+    }
+
 
 //    Local servers
 //    private final String baseURL = "http://192.168.1.117/edna_sfa2/android_service/";
 //    private final String baseURL = "http://192.168.1.90/edna_sfa2/"
 //    private final String baseURL = "http://192.168.1.90/edna_sfa2/";
 //    private final String baseURL = "http://192.168.1.200/edna_sfa2/";
-
 
     public String getBaseURL() {
         return this.baseURL;
@@ -158,7 +164,7 @@ public class NetworkFunctions {
      * @param task     either start attendance or end attendance "begin" or "end"
      * @return
      */
-    public String setAttendance(Location location, String task) throws IOException{
+    public String setAttendance(Location location, String task) throws IOException {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("latitude", String.valueOf(location.getLatitude())));
         params.add(new BasicNameValuePair("longitude", String.valueOf(location.getLongitude())));
@@ -356,7 +362,7 @@ public class NetworkFunctions {
         return postToServer(baseURL + "save_payments", params);
     }
 
-    public Bitmap downloadImage(String fileName){
+    public Bitmap downloadImage(String fileName) {
         String image_url = (new StringBuilder()).append("http://124.43.26.21/edna_sfa2/uploads/product_images/").append(fileName).toString();
         Bitmap bitmap = null;
         Log.i(LOG_TAG, "Fetching: " + image_url);
@@ -371,8 +377,7 @@ public class NetworkFunctions {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             return bitmap;
         }
     }

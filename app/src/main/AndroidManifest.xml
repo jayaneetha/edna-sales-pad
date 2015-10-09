@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -47,6 +50,18 @@
         <activity
             android:name=".SelectDealerActivity"
             android:label="@string/title_activity_select_dealer" >
+        </activity>
+        <activity
+            android:name=".UnlockActivity"
+            android:label="@string/title_activity_unlock" >
+        </activity>
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+        <activity
+            android:name=".DealerDetailsActivity"
+            android:label="@string/title_activity_dealer_details" >
         </activity>
     </application>
 

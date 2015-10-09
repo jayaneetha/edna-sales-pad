@@ -38,42 +38,32 @@ import at.markushi.ui.CircleButton;
 
 public class MarkAttendanceActivity extends ActionBarActivity {
 
+    private static Resources resource;
     private final String LOG_TAG = MarkAttendanceActivity.class.getSimpleName();
-
     private Location finalLocation;
     private LocationManager locationManager;
-
     private ProgressWheel progressWheel;
     private TextView tvProgress;
-
     private DatabaseHandler dbHandler;
     private SharedPref sharedPref;
-
     private boolean openSequence = false;
-
     private boolean isDayStarted;
-
     private TextView tvTime;
-
     private TextView tvLocationAddressBegin, tvLocationCoordinatesBegin, tvCapturedTimeBegin;
-    private Button tvBeginHeader,tvEndHeader;
+    private Button tvBeginHeader, tvEndHeader;
     private CircleButton rndConfirmBegin;
-
     private TextView tvLocationAddressEnd, tvLocationCoordinatesEnd, tvCapturedTimeEnd;
     private CircleButton rndConfirmEnd;
-
     private Runnable countRunnable;
     private SimpleDateFormat dateFormat;
     private String formattedDate;
     private long capturedTime;
-
     private boolean gpsActive, networkActive;
     private AttendanceLocationListener locationListener;
     private Handler locationHandler;
     private Runnable switchRunnable;
     private boolean locSwitch;
     private NetworkFunctions networkFunctions;
-    private static Resources resource;
     private boolean dayStarted;
 
     @Override
@@ -90,19 +80,19 @@ public class MarkAttendanceActivity extends ActionBarActivity {
         Attendance attendance = dbHandler.getAttendanceOfCurrentSession(sessionId);
 
         TextView tvDate = (TextView) findViewById(R.id.mark_attendance_tv_date);
-        tvTime = (TextView)findViewById(R.id.mark_attendance_tv_clock);
+        tvTime = (TextView) findViewById(R.id.mark_attendance_tv_clock);
 
-        tvBeginHeader = (Button)findViewById(R.id.mark_attendance_tv_begin_header);
-        tvEndHeader = (Button)findViewById(R.id.mark_attendance_tv_end_header);
-        tvCapturedTimeBegin = (TextView)findViewById(R.id.mark_attendance_tv_begin_time);
-        tvLocationAddressBegin = (TextView)findViewById(R.id.mark_attendance_tv_begin_location);
-        tvLocationCoordinatesBegin = (TextView)findViewById(R.id.mark_attendance_tv_begin_location_coordinates);
-        rndConfirmBegin = (CircleButton)findViewById(R.id.mark_attendance_crclbtn_start_function);
+        tvBeginHeader = (Button) findViewById(R.id.mark_attendance_tv_begin_header);
+        tvEndHeader = (Button) findViewById(R.id.mark_attendance_tv_end_header);
+        tvCapturedTimeBegin = (TextView) findViewById(R.id.mark_attendance_tv_begin_time);
+        tvLocationAddressBegin = (TextView) findViewById(R.id.mark_attendance_tv_begin_location);
+        tvLocationCoordinatesBegin = (TextView) findViewById(R.id.mark_attendance_tv_begin_location_coordinates);
+        rndConfirmBegin = (CircleButton) findViewById(R.id.mark_attendance_crclbtn_start_function);
 
-        tvCapturedTimeEnd = (TextView)findViewById(R.id.mark_attendance_tv_end_time);
-        tvLocationAddressEnd = (TextView)findViewById(R.id.mark_attendance_tv_end_location);
-        tvLocationCoordinatesEnd = (TextView)findViewById(R.id.mark_attendance_tv_end_location_coordinates);
-        rndConfirmEnd = (CircleButton)findViewById(R.id.mark_attendance_crclbtn_end_function);
+        tvCapturedTimeEnd = (TextView) findViewById(R.id.mark_attendance_tv_end_time);
+        tvLocationAddressEnd = (TextView) findViewById(R.id.mark_attendance_tv_end_location);
+        tvLocationCoordinatesEnd = (TextView) findViewById(R.id.mark_attendance_tv_end_location_coordinates);
+        rndConfirmEnd = (CircleButton) findViewById(R.id.mark_attendance_crclbtn_end_function);
 
         rndConfirmBegin.setScaleX(0);
         rndConfirmBegin.setScaleY(0);
@@ -120,14 +110,14 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
         tvEndHeader.setEnabled(false);
 
-        if(attendance != null && isDayStarted ){
+        if (attendance != null && isDayStarted) {
             tvEndHeader.setEnabled(true);
             tvBeginHeader.setEnabled(false);
             tvCapturedTimeBegin.setText(dateFormat.format(attendance.getLogTime()));
             tvLocationAddressBegin.setText(attendance.getLoc());
-            tvLocationCoordinatesBegin.setText(String.valueOf(attendance.getLatitude())+ ", " + String.valueOf(attendance.getLongitude()));
+            tvLocationCoordinatesBegin.setText(String.valueOf(attendance.getLatitude()) + ", " + String.valueOf(attendance.getLongitude()));
 
-        }else {
+        } else {
             tvCapturedTimeBegin.setText("");
             tvLocationAddressBegin.setText("");
             tvLocationCoordinatesBegin.setText("");
@@ -175,10 +165,10 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
 //        tvFunction = (TextView)findViewById(R.id.mark_attendance_tv_function);
 
-        progressWheel = (ProgressWheel)findViewById(R.id.mark_attendance_progress_location);
-        tvProgress = (TextView)findViewById(R.id.mark_attendance_tv_progress);
+        progressWheel = (ProgressWheel) findViewById(R.id.mark_attendance_progress_location);
+        tvProgress = (TextView) findViewById(R.id.mark_attendance_tv_progress);
 
-        locationManager = (LocationManager)MarkAttendanceActivity.this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) MarkAttendanceActivity.this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new AttendanceLocationListener();
 
         try {
@@ -208,14 +198,15 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 attendance.setLocalSession(sessionId);
                 dbHandler.storeAttendance(attendance);
 
-                try {
-                    networkFunctions.setAttendance(finalLocation, "begin");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                new Runnable(){
+                    @Override
+                    public void run() {
+                        new NotifyServer().execute("begin");
+                    }
+                };
 
-                if(openSequence) {
-                    Log.i(LOG_TAG,"View Routes");
+                if (openSequence) {
+                    Log.i(LOG_TAG, "View Routes");
 
                     Intent intent = new Intent(MarkAttendanceActivity.this, ViewRoutesActivity.class);
                     intent.putExtra(RequestCodes.KEY_STARTING_SEQUENCE, true);
@@ -242,15 +233,16 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 attendance.setLongitude(finalLocation.getLongitude());
                 attendance.setLocalSession(sessionId);
                 dbHandler.storeAttendance(attendance);
-                try {
-                    networkFunctions.setAttendance(finalLocation , "end");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 sharedPref.endDay();
 
+                new Runnable(){
+                    @Override
+                    public void run() {
+                new NotifyServer().execute("end");
+                    }
+                };
+                System.exit(0);
                 finish();
-
             }
         });
 
@@ -260,7 +252,7 @@ public class MarkAttendanceActivity extends ActionBarActivity {
     }
 
     private void showButton() {
-        if(isDayStarted){
+        if (isDayStarted) {
             rndConfirmEnd.setEnabled(true);
             ViewPropertyAnimator.animate(rndConfirmEnd).cancel();
             ViewPropertyAnimator.animate(rndConfirmEnd).scaleX(1).scaleY(1).setDuration(200).setStartDelay(50).start();
@@ -305,12 +297,12 @@ public class MarkAttendanceActivity extends ActionBarActivity {
         }
 
 
-        if(networkActive) {
-            if(gpsActive){
+        if (networkActive) {
+            if (gpsActive) {
                 // Request timed location update using GPS
                 requestGPSLocation();
 
-                if(switchRunnable == null) {
+                if (switchRunnable == null) {
                     switchRunnable = new Runnable() {
                         @Override
                         public void run() {
@@ -322,13 +314,13 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                 }
 
                 // Stop getting the location from GPS  and get from network if taking too long
-                locationHandler.postDelayed(switchRunnable, 10*1000);
+                locationHandler.postDelayed(switchRunnable, 10 * 1000);
             } else {
                 // Request location update using network
                 requestNetworkLocation();
             }
         } else {
-            if(gpsActive) {
+            if (gpsActive) {
                 // Only GPS active. Request location from GPS provider
                 requestGPSLocation();
             } else {
@@ -340,20 +332,28 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (switchRunnable != null && !locSwitch) {
+            locationHandler.removeCallbacks(switchRunnable);
+        }
+        super.onBackPressed();
+    }
+
     private class AttendanceLocationListener implements LocationListener {
 
         @Override
         public void onLocationChanged(Location location) {
-            if(location != null) {
+            if (location != null) {
                 finalLocation = location;
-                Log.i(LOG_TAG,"Lat : " + String.valueOf(location.getLatitude()) + "\nLon : " + String.valueOf(location.getLongitude()));
+                Log.i(LOG_TAG, "Lat : " + String.valueOf(location.getLatitude()) + "\nLon : " + String.valueOf(location.getLongitude()));
                 locationManager.removeUpdates(this);
 
 //                showButton();
                 capturedTime = System.currentTimeMillis();
 
-                if(NetworkUtil.isNetworkAvailable(MarkAttendanceActivity.this)){
-                    if(isDayStarted){
+                if (NetworkUtil.isNetworkAvailable(MarkAttendanceActivity.this)) {
+                    if (isDayStarted) {
                         tvCapturedTimeEnd.setText(dateFormat.format(new Date(capturedTime)));
                         tvLocationAddressEnd.setText("Please wait...");
                         tvLocationCoordinatesEnd.setText(String.valueOf(finalLocation.getLatitude()) + ", " + String.valueOf(finalLocation.getLongitude()));
@@ -367,7 +367,7 @@ public class MarkAttendanceActivity extends ActionBarActivity {
                     tvProgress.setVisibility(View.INVISIBLE);
                     progressWheel.stopSpinning();
 
-                    if(isDayStarted){
+                    if (isDayStarted) {
                         tvCapturedTimeEnd.setText(dateFormat.format(new Date(capturedTime)));
                         tvLocationAddressEnd.setText("Cannot process location");
                         tvLocationCoordinatesEnd.setText(String.valueOf(finalLocation.getLatitude()) + ", " + String.valueOf(finalLocation.getLongitude()));
@@ -392,7 +392,7 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
         @Override
         public void onProviderEnabled(String provider) {
-            if(finalLocation == null) {
+            if (finalLocation == null) {
                 Toast.makeText(MarkAttendanceActivity.this, "Provider enabled. Accessing location", Toast.LENGTH_SHORT).show();
 
                 tvProgress.setVisibility(View.VISIBLE);
@@ -411,6 +411,19 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
     }
 
+    private class NotifyServer extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            try {
+                networkFunctions.setAttendance(finalLocation, params[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
     private class GetAddress extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -426,17 +439,17 @@ public class MarkAttendanceActivity extends ActionBarActivity {
 
                 String response = networkFunctions.getAddressOfLocation(finalLocation);
 
-                if(response != null && response.length() > 0) {
+                if (response != null && response.length() > 0) {
                     JSONObject responseJSON = new JSONObject(response);
 
                     boolean status = responseJSON.getString("status").equalsIgnoreCase("OK");
 
-                    if(status) {
+                    if (status) {
                         JSONArray addressesArray = responseJSON.getJSONArray("results");
-                        if(addressesArray.length()>0){
+                        if (addressesArray.length() > 0) {
                             String finalAddress = addressesArray.getJSONObject(0).getString("formatted_address");
-                            Log.i(LOG_TAG,"Final Address: " + finalAddress);
-                            if(finalAddress != null) {
+                            Log.i(LOG_TAG, "Final Address: " + finalAddress);
+                            if (finalAddress != null) {
                                 return finalAddress;
                             }
                         }
@@ -462,15 +475,15 @@ public class MarkAttendanceActivity extends ActionBarActivity {
             super.onPostExecute(s);
 //            tvAddress.setText(s);
 
-            if(isDayStarted){
-                if(s != null) {
+            if (isDayStarted) {
+                if (s != null) {
                     tvLocationAddressEnd.setText(s);
                 } else {
                     tvLocationAddressEnd.setText("Cannot process location");
                 }
                 tvLocationCoordinatesEnd.setText(String.valueOf(finalLocation.getLatitude()) + ", " + String.valueOf(finalLocation.getLongitude()));
             } else {
-                if(s != null) {
+                if (s != null) {
                     tvLocationAddressBegin.setText(s);
                 } else {
                     tvLocationAddressBegin.setText("Cannot process location");
@@ -502,13 +515,5 @@ public class MarkAttendanceActivity extends ActionBarActivity {
             }
         }
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(switchRunnable != null && !locSwitch){
-            locationHandler.removeCallbacks(switchRunnable);
-        }
-        super.onBackPressed();
     }
 }

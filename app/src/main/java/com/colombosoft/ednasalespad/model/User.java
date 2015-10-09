@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Admin on 9/20/15.
@@ -16,6 +17,7 @@ public class User implements Serializable {
     private int id, type, locationId, salesType;
     private String name, username, position, contact, territory, imageURI;
     private int territoryId;
+    private Date lastLoggedIn;
 
     /**
      * Default Constructor
@@ -49,6 +51,8 @@ public class User implements Serializable {
         this.imageURI = imageURI;
         this.territoryId = territoryId;
     }
+
+
 
     //Getters
     public int getId() {

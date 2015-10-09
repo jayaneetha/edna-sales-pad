@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusableInTouchMode="false">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:stretchColumns="2">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_outlet_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center_vertical"
+                    android:text="OUTLET"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_outlet"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_column="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="Jayalath Grocery"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_address_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="ADDRESS"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_column="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:text="25/2, Old Kottawa Road, Nugegoda."
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_owner_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="OWNER"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_column="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:text="M. K. Jayantha Perera"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_dob_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="BIRTHDAY"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_column="2"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:text="15-10-1954"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="16dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_contact_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="CONTACT NO"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_column="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_contact_land"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="Land - 011 2872585"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_contact_mob"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="Mobi - 077 3212450"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_assistant_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_column="1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="ASSISTANT"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_assistant"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_column="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="Namal Wijewardena"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_as_dob_txt"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="S.A.BIRTHDAY"
+                    android:textSize="18sp" android:layout_column="1"/>
+
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_as_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="10-12-1985"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_column="2"/>
+
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <RelativeLayout
+                android:layout_column="1">
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_front_image_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="SHOP FRONT VIEW"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/fragment_out_det_personal_iv_front_image_view"
+                    android:layout_width="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_front_image_txt"
+                    android:adjustViewBounds="false" />
+
+                <RelativeLayout
+                    android:id="@+id/fragment_out_det_personal_rel_front_image_view_na"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_front_image_txt"
+                    android:background="@android:color/darker_gray"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_front_image_view_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="NO IMAGE AVAILABLE\nCLICK HERE TO CAPTURE"
+                        android:textColor="@color/red_error"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_column="2">
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_show_image_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="SHOW CASE"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/fragment_out_det_personal_iv_show_image_view"
+                    android:layout_width="300sp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_show_image_txt" />
+
+                <RelativeLayout
+                    android:id="@+id/fragment_out_det_personal_rel_show_image_view_na"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_show_image_txt"
+                    android:background="@android:color/darker_gray">
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_show_image_view_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="NO IMAGE AVAILABLE\nCLICK HERE TO CAPTURE"
+                        android:textColor="@color/red_error"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow>
+            <RelativeLayout
+                android:layout_column="1">
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_promotion_1_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="PROMOTION ONE"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/fragment_out_det_personal_iv_promotion_1_view"
+                    android:layout_width="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_promotion_1_txt" />
+
+                <RelativeLayout
+                    android:id="@+id/fragment_out_det_personal_rel_promotion_1_na"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_promotion_1_txt"
+                    android:background="@android:color/darker_gray">
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_promotion_1_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="NO IMAGE AVAILABLE\nCLICK HERE TO CAPTURE"
+                        android:textColor="@color/red_error"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_column="2">
+                <TextView
+                    android:id="@+id/fragment_out_det_personal_tv_promotion_2_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="PROMOTION TWO"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/fragment_out_det_personal_iv_promotion_2_view"
+                    android:layout_width="300sp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_promotion_2_txt" />
+
+                <RelativeLayout
+                    android:id="@+id/fragment_out_det_personal_rel_promotion_2_na"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_below="@+id/fragment_out_det_personal_tv_promotion_2_txt"
+                    android:background="@android:color/darker_gray">
+
+                    <TextView
+                        android:id="@+id/fragment_out_det_personal_tv_promotion_2_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="NO IMAGE AVAILABLE\nCLICK HERE TO CAPTURE"
+                        android:textColor="@color/red_error"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </TableRow>
+
+
+    </TableLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/fragment_out_det_personal_iv_show_image_view">
+
+    </View>
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/bg_image">
+
+    <include
+        android:id="@+id/unlock_toolbar"
+        layout="@layout/toolbar"/>
+
+    <com.colombosoft.ednasalespad.libs.widget.CircularImageView
+        android:id="@+id/unlock_profile_pic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/unlock_center_mark"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/blank"
+        android:layout_toLeftOf="@id/unlock_center_mark"></com.colombosoft.ednasalespad.libs.widget.CircularImageView>
+
+    <TextView
+        android:id="@+id/unlock_rep_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/unlock_profile_pic"
+        android:layout_marginBottom="20dp"
+        android:text="Tel : 0771929384"
+        android:layout_toRightOf="@+id/unlock_center_mark"
+        android:singleLine="true"
+        android:paddingRight="5dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/unlock_rep_territory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unlock_rep_contact"
+        android:textSize="16sp"
+        android:paddingBottom="10dp"
+        android:singleLine="true"
+        android:paddingRight="5dp"
+        android:layout_toRightOf="@+id/unlock_center_mark"
+        android:text="Nugegoda Area"/>
+
+    <TextView
+        android:id="@+id/unlock_rep_role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unlock_rep_territory"
+        android:textSize="16sp"
+        android:paddingBottom="10dp"
+        android:singleLine="true"
+        android:paddingRight="5dp"
+        android:layout_toRightOf="@+id/unlock_center_mark"
+        android:text="Sales Representative"/>
+
+    <TextView
+        android:id="@+id/unlock_rep_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unlock_rep_role"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:paddingRight="5dp"
+        android:layout_toRightOf="@+id/unlock_center_mark"
+        android:text="Mr. Indika Ranaweera"/>
+
+    <TextView
+        android:id="@+id/unlock_tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red_error"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:clickable="true"
+        android:textAllCaps="true"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/unlock_center_mark"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"/>
+
+    <EditText
+        android:id="@+id/unlock_et_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_et_password_hint"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/unlock_center_mark"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/unlock_btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/unlock_et_password"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selectable_button"
+        android:textSize="18sp"
+        android:text="@string/login_btn_sign_in_txt"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>

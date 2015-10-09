@@ -11,8 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ExpandableListView;
@@ -123,6 +121,8 @@ public class DashboardActivity extends ActionBarActivity {
 
         navDrawerItemList.add(new GroupItem(14, resources.getDrawable(R.drawable.logout), "Sign Out"));
 
+        navDrawerItemList.add(new GroupItem(15, resources.getDrawable(R.drawable.logout), "Update Profile"));
+
         // Define the navDrawerExpandableListAdapter for the animated expandable ListView
         navDrawerExpandableListAdapter = new NavDrawerExpandableListAdapter(DashboardActivity.this, navDrawerItemList);
         drawerList.setAdapter(navDrawerExpandableListAdapter);
@@ -214,6 +214,7 @@ public class DashboardActivity extends ActionBarActivity {
                     case 1:
                         // Navigation menu : Mark Attendance
                         startActivity(new Intent(DashboardActivity.this, MarkAttendanceActivity.class));
+                        finish();
                         break;
                     case 2:
                         // Navigation menu : Dashboard
@@ -275,6 +276,10 @@ public class DashboardActivity extends ActionBarActivity {
                         // Navigation menu : Others : Database
                         //startActivity(new Intent(DashboardActivity.this, ViewDatabaseActivity.class));
                         break;
+                    case 15:
+                        startActivity(new Intent(DashboardActivity.this, UserProfileActivity.class));
+                        finish();
+                        break;
                     default:
                         // Invalid argument. Most likely an un-tracked entry to the animated expandable ListView.
                         Toast.makeText(DashboardActivity.this, "Invalid request", Toast.LENGTH_SHORT).show();
@@ -316,28 +321,6 @@ public class DashboardActivity extends ActionBarActivity {
                 System.exit(0);
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dashboard, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private class Sync extends AsyncTask<Void, Void, Boolean> {

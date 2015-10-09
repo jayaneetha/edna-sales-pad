@@ -423,6 +423,11 @@ public class LoginActivity extends ActionBarActivity {
                 if (pDialog.isShowing()) {
                     pDialog.dismiss();
                 }
+
+                //Store the logged in timestamp in the DB.
+                //This is to check the last logged in time in next application execution.
+                DatabaseHandler.getDbHandler(LoginActivity.this).setLoggedInTime(pref.getLoginUser().getId());
+
                 Toast.makeText(LoginActivity.this, "Signed in successfully", Toast.LENGTH_SHORT).show();
                 pref.setLoginStatus(true);
                 Intent intent = new Intent(LoginActivity.this, MarkAttendanceActivity.class);

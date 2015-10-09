@@ -12,7 +12,7 @@ import java.util.List;
 public class Outlet implements Serializable {
 
     private int outletId, routeId, outletType, outletClass;
-    private String outletName, address, ownerName, contactLand, outletCode, frontImageURI, showcaseImageUri;
+    private String outletName, address, ownerName, contactLand, outletCode, frontImageURI, showcaseImageUri, promotion1ImageUri, promotion2ImageUri;
     private List<HistoryDetail> outletHistory;
 
     public Outlet() {
@@ -62,6 +62,25 @@ public class Outlet implements Serializable {
         this.outletHistory = outletHistory;
     }
 
+    public Outlet(int outletId, int routeId, int outletType, int outletClass, String outletName,
+                  String outletCode, String address, String ownerName, String contactLand,
+                  String frontImageURI, String showcaseImageUri, String promotion1ImageUri, String promotion2ImageUri, List<HistoryDetail> outletHistory) {
+        this.outletId = outletId;
+        this.routeId = routeId;
+        this.outletType = outletType;
+        this.outletClass = outletClass;
+        this.outletName = outletName;
+        this.outletCode = outletCode;
+        this.address = address;
+        this.ownerName = ownerName;
+        this.contactLand = contactLand;
+        this.frontImageURI = frontImageURI;
+        this.showcaseImageUri = showcaseImageUri;
+        this.outletHistory = outletHistory;
+        this.promotion1ImageUri = promotion1ImageUri;
+        this.promotion2ImageUri = promotion2ImageUri;
+    }
+
     /*
     Call this constructor to create an outlet without an assistant.
      */
@@ -84,13 +103,13 @@ public class Outlet implements Serializable {
      * @return
      * @throws JSONException
      */
-    public static Outlet parseOutlet(JSONObject instance) throws JSONException {
+    public static Outlet parseOutlet(JSONObject instance, int routeId) throws JSONException {
 
         if (instance != null) {
             Outlet outlet = new Outlet();
             outlet.setOutletId(instance.getInt("id_outlet"));
             outlet.setOutletName(instance.getString("retailer_name"));
-            //outlet.setRouteId(instance.getInt("route_code")); --Thejan
+            outlet.setRouteId(routeId);
             outlet.setAddress("N/A");
             outlet.setOwnerName(instance.getString("owner_name"));
             outlet.setContactLand("N/A");
@@ -171,6 +190,22 @@ public class Outlet implements Serializable {
 
     public void setFrontImageURI(String frontImageURI) {
         this.frontImageURI = frontImageURI;
+    }
+
+    public String getPromotion1ImageUri() {
+        return promotion1ImageUri;
+    }
+
+    public void setPromotion1ImageUri(String promotion1ImageUri) {
+        this.promotion1ImageUri = promotion1ImageUri;
+    }
+
+    public String getPromotion2ImageUri() {
+        return promotion2ImageUri;
+    }
+
+    public void setPromotion2ImageUri(String promotion2ImageUri) {
+        this.promotion2ImageUri = promotion2ImageUri;
     }
 
     public String getShowcaseImageUri() {

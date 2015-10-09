@@ -44,6 +44,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static DatabaseHandler dbHandler;
     private final String LOG_TAG = DatabaseHandler.class.getSimpleName();
 
+    //Table session
+    private final String tableSession = "tbl_session";
+    private final String keyLoggedInTimestamp = "logged_in_time";
+
     // Table user
     private final String tableUser = "tbl_user";
     private final String keyUserId = "user_id";
@@ -92,6 +96,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private final String keyOutletContactLand = "outlet_land";
     private final String keyOutletFrontImageUri = "outlet_f_image";
     private final String keyOutletShowcaseImageUri = "outlet_s_image";
+    private final String keyOutletPromotion1ImageUri = "outlet_p_1_image";
+    private final String keyOutletPromotion2ImageUri = "outlet_p_2_image";
     private final String keyOutletTarget = "target";
 
     // Table outlet history
@@ -306,6 +312,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //                + keyOutletAssistantDOB + " long(16), "
                 + keyOutletFrontImageUri + " varchar(128), "
                 + keyOutletShowcaseImageUri + " varchar(128), "
+                + keyOutletPromotion1ImageUri + " varchar(128), "
+                + keyOutletPromotion2ImageUri + " varchar(128), "
                 + keyOutletTarget + " double(12)"
                 + ")");
         db.execSQL("create table if not exists " + tableOutletHistory + "("
@@ -469,6 +477,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + keyFlavourName + " varchar(32), "
                 + keyFlavourColour + " varchar(16)"
                 + ")");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + tableSession + " ("
+                + keyUserId + " integer(8) primary key, "
+                + keyLoggedInTimestamp + " integer(8)"
+                + ")");
     }
 
     @Override
@@ -493,7 +505,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + tableVisitDetails);
         db.execSQL("drop table if exists " + tableAttendance);
         db.execSQL("drop table if exists " + tableFlavour);
+        db.execSQL("drop table if exists " + tableSession);
         onCreate(db);
+    }
+
+    public void setLoggedInTime(int userId) {
+        long unixTime = System.currentTimeMillis() / 1000L;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + tableSession);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(keyUserId, userId);
+        contentValues.put(keyLoggedInTimestamp, String.valueOf(unixTime));
+        db.insert(tableSession, null, contentValues);
+        db.close();
+    }
+
+    public long getLoggedInTime(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT "
+                + keyLoggedInTimestamp + " "
+                + "FROM " + tableSession + " "
+                + "WHERE " + keyUserId + "=" + String.valueOf(userId);
+        Log.i(LOG_TAG, selectQuery);
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            long timestamp = cursor.getLong(0);
+            cursor.close();
+            db.close();
+            return timestamp;
+        } else {
+            return 0;
+        }
     }
 
     /* **************************************** User **************************************** */
@@ -1607,7 +1649,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(keyRouteName, route.getRouteName());
         contentValues.put(keyRouteFixedTarget, route.getFixedTarget());
         contentValues.put(keyRouteSelectedTarget, route.getSelectedTarget());
-        db.update(tableRoute,contentValues, keyRouteId + "=?",new String[]{String.valueOf(route.getRouteId())});
+        db.update(tableRoute, contentValues, keyRouteId + "=?", new String[]{String.valueOf(route.getRouteId())});
+    }
+
+    public void updateOutlet(Outlet outlet) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+//        contentValues.put(keyOutletId, outlet.getOutletId());
+        contentValues.put(keyOutletTypeId, outlet.getOutletType());
+        contentValues.put(keyOutletName, outlet.getOutletName());
+        contentValues.put(keyOutletClassId, outlet.getOutletClass());
+        contentValues.put(keyOutletCode, outlet.getOutletCode());
+        contentValues.put(keyOutletAddress, outlet.getAddress());
+        contentValues.put(keyOutletOwnerName, outlet.getOwnerName());
+        contentValues.put(keyOutletContactLand, outlet.getContactLand());
+        contentValues.put(keyOutletFrontImageUri, outlet.getFrontImageURI());
+        contentValues.put(keyOutletShowcaseImageUri, outlet.getShowcaseImageUri());
+        contentValues.put(keyOutletPromotion1ImageUri, outlet.getPromotion1ImageUri());
+        contentValues.put(keyOutletPromotion2ImageUri, outlet.getPromotion2ImageUri());
+
+        db.update(tableOutlet, contentValues, keyOutletId + "=?", new String[]{String.valueOf(outlet.getOutletId())});
+
+        Log.i(LOG_TAG,outlet.getFrontImageURI());
+
     }
 
 
@@ -2008,7 +2072,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + keyOutletFrontImageUri + ", " //8
                 + keyOutletShowcaseImageUri + ", " //9
                 + keyOutletTarget + ", " //10
-                + keyRouteId
+                + keyRouteId + ", " //11
+                +   keyOutletPromotion1ImageUri + ", " //12
+                +   keyOutletPromotion2ImageUri  //13
                 + " from " + tableOutlet + " where " + keyOutletId + "=?";
         Cursor outletCursor = db.rawQuery(selectOutlet, new String[]{String.valueOf(outId)});
         if (outletCursor.moveToFirst()) {
@@ -2036,8 +2102,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     outletCursor.getString(2), // address
                     outletCursor.getString(3), // ownerName
                     outletCursor.getString(5), // contact
-                    outletCursor.getString(10), // frontImage
+                    outletCursor.getString(8), // frontImage
                     outletCursor.getString(9), // showcaseImage
+                    outletCursor.getString(12), // Promo1Image
+                    outletCursor.getString(13), // Promo2Image
+
                     new ArrayList<HistoryDetail>());  // outletHistory
             outlet.setOutletHistory(getOutletHistory(db, outlet.getOutletId()));
             return outlet;
