@@ -182,7 +182,7 @@ public class DealerDetailsActivity extends ActionBarActivity {
             public void onClick(View v) {
                 closeFAM();
                 Toast.makeText(DealerDetailsActivity.this, "Unproductive", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(DealerDetailsActivity.this, UnproductiveCallActivity.class));
             }
         });
 

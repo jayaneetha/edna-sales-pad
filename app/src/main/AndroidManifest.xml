@@ -9,9 +9,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -62,6 +63,10 @@
         <activity
             android:name=".DealerDetailsActivity"
             android:label="@string/title_activity_dealer_details" >
+        </activity>
+        <activity
+            android:name=".UnproductiveCallActivity"
+            android:label="@string/title_activity_unproductive_call" >
         </activity>
     </application>
 

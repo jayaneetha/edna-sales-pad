@@ -28,7 +28,19 @@
         <item>Test</item>
         <item>Test-IP</item>
     </string-array>
-    
+
+    <string-array name="unproductive_call_reasons">
+        <item>Select Reason</item>
+        <item>Shop Closed</item>
+        <item>Returned Cheques</item>
+        <item>Owner Not Available</item>
+        <item>Stock Available</item>
+        <item>Payments Outstanding</item>
+        <item>Not Willing to buy Edna</item>
+        <item>Van out of stock</item>
+    </string-array>
+
+
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_mark_attendance">MarkAttendanceActivity</string>
     <string name="title_activity_view_routes">ViewRoutesActivity</string>
@@ -40,4 +52,5 @@
     <string name="title_activity_unlock">UnlockActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_dealer_details">DealerDetailsActivity</string>
+    <string name="title_activity_unproductive_call">UnproductiveCallActivity</string>
 </resources>

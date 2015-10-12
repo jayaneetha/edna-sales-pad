@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Outlet implements Serializable {
 
+
     private int outletId, routeId, outletType, outletClass;
     private String outletName, address, ownerName, contactLand, outletCode, frontImageURI, showcaseImageUri, promotion1ImageUri, promotion2ImageUri;
     private List<HistoryDetail> outletHistory;

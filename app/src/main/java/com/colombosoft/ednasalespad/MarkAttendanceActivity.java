@@ -394,7 +394,6 @@ public class MarkAttendanceActivity extends ActionBarActivity {
         public void onProviderEnabled(String provider) {
             if (finalLocation == null) {
                 Toast.makeText(MarkAttendanceActivity.this, "Provider enabled. Accessing location", Toast.LENGTH_SHORT).show();
-
                 tvProgress.setVisibility(View.VISIBLE);
 //                progressWheel.setVisibility(View.VISIBLE);
                 progressWheel.spin();

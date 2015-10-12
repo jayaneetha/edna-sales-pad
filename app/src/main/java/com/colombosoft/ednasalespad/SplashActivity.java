@@ -12,6 +12,10 @@ import com.colombosoft.ednasalespad.helpers.SharedPref;
 import com.colombosoft.ednasalespad.model.User;
 import com.colombosoft.ednasalespad.utils.RequestCodes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class SplashActivity extends Activity {
 
     private final String LOG_TAG = SplashActivity.class.getSimpleName();
@@ -32,8 +36,7 @@ public class SplashActivity extends Activity {
         if (user != null) {
             int userId = user.getId();
             long lastLoggedInTime = databaseHandler.getLoggedInTime(userId);
-            long now = System.currentTimeMillis() / 1000L;
-            if ((now - lastLoggedInTime) > 86400) {
+            if (isNewDay(lastLoggedInTime)) {
                 pref.setLoginStatus(false);
             }
         }
@@ -90,5 +93,26 @@ public class SplashActivity extends Activity {
             }
         }, 1000);
 
+    }
+
+    private boolean isNewDay(long lastTimestamp) {
+
+        long now = System.currentTimeMillis() / 1000L;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        String lastDate = simpleDateFormat.format(new Date(lastTimestamp * 1000));
+        String nowDate = simpleDateFormat.format(new Date(now * 1000));
+
+        Log.i(LOG_TAG, lastDate);
+        Log.i(LOG_TAG, nowDate);
+
+        if (nowDate.equals(lastDate)) {
+            //the day has not changed
+            return false;
+        } else {
+            //day has changed
+            return true;
+        }
     }
 }
