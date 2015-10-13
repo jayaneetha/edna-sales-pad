@@ -41,4 +41,8 @@ public class OutletType {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return typeName;
+    }
 }

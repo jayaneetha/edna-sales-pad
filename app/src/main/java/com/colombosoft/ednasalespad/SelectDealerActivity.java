@@ -206,6 +206,7 @@ public class SelectDealerActivity extends ActionBarActivity {
         fabAddOutlet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(SelectDealerActivity.this, AddDealerActivity.class));
                 Toast.makeText(SelectDealerActivity.this, "Add New Dealer", Toast.LENGTH_SHORT).show();
             }
         });

@@ -1489,6 +1489,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+
+
     public List<OutletType> getOutletTypes() {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1517,8 +1519,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         for (OutletClass outletClass : outletClasses) {
-            values.put(keyOutletTypeId, outletClass.getClassId());
-            values.put(keyOutletTypeName, outletClass.getClassName());
+            values.put(keyOutletClassId, outletClass.getClassId());
+            values.put(keyOutletClassName, outletClass.getClassName());
             db.insert(tableOutletClass, null, values);
         }
 
@@ -1671,6 +1673,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.update(tableOutlet, contentValues, keyOutletId + "=?", new String[]{String.valueOf(outlet.getOutletId())});
     }
 
+    public void storeOutlet(Outlet outlet) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(keyOutletId, outlet.getOutletId());
+        contentValues.put(keyRouteId, outlet.getRouteId());
+        contentValues.put(keyOutletTypeId, outlet.getOutletType());
+        contentValues.put(keyOutletName, outlet.getOutletName());
+        contentValues.put(keyOutletClassId, outlet.getOutletClass());
+        contentValues.put(keyOutletCode, outlet.getOutletCode());
+        contentValues.put(keyOutletAddress, outlet.getAddress());
+        contentValues.put(keyOutletOwnerName, outlet.getOwnerName());
+        contentValues.put(keyOutletContactLand, outlet.getContactLand());
+        contentValues.put(keyOutletFrontImageUri, outlet.getFrontImageURI());
+        contentValues.put(keyOutletShowcaseImageUri, outlet.getShowcaseImageUri());
+        contentValues.put(keyOutletPromotion1ImageUri, outlet.getPromotion1ImageUri());
+        contentValues.put(keyOutletPromotion2ImageUri, outlet.getPromotion2ImageUri());
+        db.insert(tableOutlet, null, contentValues);
+    }
 
     public void storeOutlets(List<Outlet> outletList) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -2054,6 +2074,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return outletList;
     }
 
+    public boolean isOutletIdAvailable(int outletId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT " + keyOutletId + " FROM " + tableOutlet + "WHERE " +keyOutletId + "=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{String.valueOf(outletId)});
+        if(cursor.getCount()>0){
+            //Not Available to use
+            return false;
+        }else{
+            //available to use
+            return true;
+        }
+    }
+
+    public boolean isOutletTypesAvailable(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT " + keyOutletTypeId + " FROM " + tableOutletType;
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.getCount()>0){
+            //Not Available to use
+            return true;
+        }else{
+            //available to use
+            return false;
+        }
+    }
+
     public Outlet getOutletOfId(int outId) {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -2070,8 +2116,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + keyOutletShowcaseImageUri + ", " //9
                 + keyOutletTarget + ", " //10
                 + keyRouteId + ", " //11
-                +   keyOutletPromotion1ImageUri + ", " //12
-                +   keyOutletPromotion2ImageUri  //13
+                + keyOutletPromotion1ImageUri + ", " //12
+                + keyOutletPromotion2ImageUri  //13
                 + " from " + tableOutlet + " where " + keyOutletId + "=?";
         Cursor outletCursor = db.rawQuery(selectOutlet, new String[]{String.valueOf(outId)});
         if (outletCursor.moveToFirst()) {

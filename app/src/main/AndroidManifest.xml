@@ -68,6 +68,10 @@
             android:name=".UnproductiveCallActivity"
             android:label="@string/title_activity_unproductive_call" >
         </activity>
+        <activity
+            android:name=".AddDealerActivity"
+            android:label="@string/title_activity_add_dealer" >
+        </activity>
     </application>
 
 </manifest>

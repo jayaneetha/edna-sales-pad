@@ -53,4 +53,5 @@
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_dealer_details">DealerDetailsActivity</string>
     <string name="title_activity_unproductive_call">UnproductiveCallActivity</string>
+    <string name="title_activity_add_dealer">AddDealerActivity</string>
 </resources>
