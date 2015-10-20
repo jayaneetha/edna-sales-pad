@@ -1,73 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/bg_image">
-
-    <include
-        android:id="@+id/unlock_toolbar"
-        layout="@layout/toolbar"/>
-
-    <com.colombosoft.ednasalespad.libs.widget.CircularImageView
-        android:id="@+id/unlock_profile_pic"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_above="@+id/unlock_center_mark"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/blank"
-        android:layout_toLeftOf="@id/unlock_center_mark"></com.colombosoft.ednasalespad.libs.widget.CircularImageView>
-
-    <TextView
-        android:id="@+id/unlock_rep_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/unlock_profile_pic"
-        android:layout_marginBottom="20dp"
-        android:text="Tel : 0771929384"
-        android:layout_toRightOf="@+id/unlock_center_mark"
-        android:singleLine="true"
-        android:paddingRight="5dp"
-        android:textSize="16sp"/>
-
-    <TextView
-        android:id="@+id/unlock_rep_territory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/unlock_rep_contact"
-        android:textSize="16sp"
-        android:paddingBottom="10dp"
-        android:singleLine="true"
-        android:paddingRight="5dp"
-        android:layout_toRightOf="@+id/unlock_center_mark"
-        android:text="Nugegoda Area"/>
-
-    <TextView
-        android:id="@+id/unlock_rep_role"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/unlock_rep_territory"
-        android:textSize="16sp"
-        android:paddingBottom="10dp"
-        android:singleLine="true"
-        android:paddingRight="5dp"
-        android:layout_toRightOf="@+id/unlock_center_mark"
-        android:text="Sales Representative"/>
-
-    <TextView
-        android:id="@+id/unlock_rep_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/unlock_rep_role"
-        android:textSize="18sp"
-        android:paddingBottom="10dp"
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:paddingRight="5dp"
-        android:layout_toRightOf="@+id/unlock_center_mark"
-        android:text="Mr. Indika Ranaweera"/>
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    android:weightSum="1">
     <TextView
         android:id="@+id/unlock_tv_error"
         android:layout_width="match_parent"
@@ -84,38 +20,197 @@
         android:textAllCaps="true"
         android:gravity="center"/>
 
-    <View
-        android:id="@+id/unlock_center_mark"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"/>
-
-    <EditText
-        android:id="@+id/unlock_et_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/login_et_password_hint"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/unlock_center_mark"
-        android:layout_marginTop="20dp"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/unlock_btn_sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/unlock_et_password"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.38"
         android:layout_marginTop="30dp"
-        android:background="@drawable/selectable_button"
-        android:textSize="18sp"
-        android:text="@string/login_btn_sign_in_txt"
-        android:textColor="@android:color/white"/>
+        android:padding="50dp">
 
-</RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="455dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/logo_im"
+                android:background="@drawable/edna_chocolate_logo"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:contentDescription="Edna Logo"
+                android:layout_weight="0.13" />
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="88dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="EI&amp;M Sales Force Automation Tab"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:id="@+id/textView3"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.46" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="444dp"
+            android:layout_height="541dp"
+
+            android:background="@drawable/login_dialogbox"
+            android:weightSum="1"
+            android:layout_gravity="left|center_horizontal"
+            android:layout_weight="0.56">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:weightSum="1"
+                android:layout_weight="0.81"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                >
+
+                <ImageView
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/unlock_profile_pic"
+                    android:layout_gravity="left|center_horizontal"
+                    android:layout_weight="0.44"
+                    android:src="@drawable/blank" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome !"
+                    android:id="@+id/textView4"
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name of the User"
+                    android:id="@+id/unlock_rep_name"
+                    android:layout_gravity="left|center_horizontal"
+                    android:textColor="#ffffff"
+                    android:textSize="35dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/unlock_et_password"
+                    android:background="#ffffff"
+                    android:layout_weight="0.15"
+                    android:hint="Password"
+                    android:padding="5dp"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="20dp" />
+
+                <Button
+                    android:textAllCaps="false"
+                    android:textSize="30dp"
+                    android:textStyle="normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign In"
+                    android:id="@+id/unlock_btn_sign_in"
+                    android:background="#771606"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:layout_weight="0.2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- Sign in with different user -"
+                    android:id="@+id/textView6"
+                    android:textColor="#ffffff"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="20dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="444dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_horizontal"
+            android:background="@drawable/gateway_1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Gateway"
+                    android:textColor="#ffffff"
+                    android:id="@+id/textView7"
+                    android:layout_marginTop="15dp"
+                    android:textSize="30dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/PIN"
+                    android:background="#ffffff"
+                    android:hint="Enter PIN"
+                    android:layout_weight="0.15"
+                    android:padding="5dp"
+                    android:textSize="25dp"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp" />
+            </LinearLayout>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/server_list_spinner"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:spinnerMode="dropdown"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
