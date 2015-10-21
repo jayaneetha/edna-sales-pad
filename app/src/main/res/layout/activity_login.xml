@@ -27,7 +27,6 @@
         android:weightSum="1"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.38"
-        android:layout_marginTop="30dp"
         android:padding="50dp">
 
 
@@ -193,7 +192,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="5dp"
                 android:paddingRight="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -203,6 +202,18 @@
                     android:id="@+id/textView7"
                     android:layout_marginTop="15dp"
                     android:textSize="30dp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:id="@+id/server_list_spinner"
+                    android:visibility="invisible"
+                    android:spinnerMode="dropdown"
+                    android:animationCache="false"
+                    android:background="#ffffff"
+
+                    android:padding="3dp"
+                    android:layout_marginTop="5dp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -216,18 +227,11 @@
                     android:inputType="number"
                     android:ems="10"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp" />
-            </LinearLayout>
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="50dp" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/server_list_spinner"
-                android:layout_gravity="right"
-                android:visibility="invisible"
-                android:spinnerMode="dropdown"
-                />
+
+            </LinearLayout>
 
         </LinearLayout>
 
