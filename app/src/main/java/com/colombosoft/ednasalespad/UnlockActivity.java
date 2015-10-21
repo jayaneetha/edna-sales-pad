@@ -10,12 +10,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +23,6 @@ import com.colombosoft.ednasalespad.dialog.CustomProgressDialog;
 import com.colombosoft.ednasalespad.helpers.DatabaseHandler;
 import com.colombosoft.ednasalespad.helpers.NetworkFunctions;
 import com.colombosoft.ednasalespad.helpers.SharedPref;
-import com.colombosoft.ednasalespad.libs.widget.CircularImageView;
 import com.colombosoft.ednasalespad.model.Flavour;
 import com.colombosoft.ednasalespad.model.Item;
 import com.colombosoft.ednasalespad.model.ItemCategory;
@@ -70,10 +69,10 @@ public class UnlockActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unlock);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.unlock_toolbar);
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText("Edna Salespad");
+//
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.unlock_toolbar);
+//        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        title.setText("Edna Salespad");
 
         pref = SharedPref.getInstance(UnlockActivity.this);
         dbHandler = DatabaseHandler.getDbHandler(UnlockActivity.this);
@@ -122,16 +121,16 @@ public class UnlockActivity extends ActionBarActivity {
 
 //            Log.d("UnlockActivity.java -> onCreate()", "Getting user :\n" + user.toString());
 
-            CircularImageView profilePic = (CircularImageView) findViewById(R.id.unlock_profile_pic);
+            ImageView profilePic = (ImageView) findViewById(R.id.unlock_profile_pic);
             TextView name = (TextView) findViewById(R.id.unlock_rep_name);
-            TextView role = (TextView) findViewById(R.id.unlock_rep_role);
-            TextView territory = (TextView) findViewById(R.id.unlock_rep_territory);
-            TextView contact = (TextView) findViewById(R.id.unlock_rep_contact);
+//            TextView role = (TextView) findViewById(R.id.unlock_rep_role);
+//            TextView territory = (TextView) findViewById(R.id.unlock_rep_territory);
+//            TextView contact = (TextView) findViewById(R.id.unlock_rep_contact);
 
             name.setText(user.getName());
-            role.setText(user.getPosition());
-            territory.setText(user.getTerritory());
-            contact.setText(user.getContact());
+//            role.setText(user.getPosition());
+//            territory.setText(user.getTerritory());
+//            contact.setText(user.getContact());
 
             String imageURI = user.getImageURI();
             if (imageURI != null) {

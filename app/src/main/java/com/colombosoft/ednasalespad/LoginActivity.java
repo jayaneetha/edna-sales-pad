@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -62,7 +61,7 @@ public class LoginActivity extends ActionBarActivity {
     private final String SERVER_URL_TESTING_IP = "http://124.43.26.21/edna_sfa2/android_service/";
 
 
-    private Toolbar toolbar;
+  //  private Toolbar toolbar;
 
     private EditText etUsername, etPassword, pin;
     private Button btnSignIn;
@@ -91,12 +90,12 @@ public class LoginActivity extends ActionBarActivity {
         networkFunctions = new NetworkFunctions();
         customAnimations = new CustomAnimations(LoginActivity.this);
 
-        toolbar = (Toolbar) findViewById(R.id.login_toolbar);
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText("Edna Sales Pad");
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        toolbar = (Toolbar) findViewById(R.id.login_toolbar);
+//        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        title.setText("Edna Sales Pad");
+//        setSupportActionBar(toolbar);
+//
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         etUsername = (EditText) findViewById(R.id.login_et_username);
         etPassword = (EditText) findViewById(R.id.login_et_password);
